@@ -43,21 +43,24 @@ server <- function(input, output) {
   # 
   # output plot
   
+  # load in dataframes of all rasters
+  rasters = readRDS("./data/rasters")
+  
   ## note that several options are reactive
   # dataset
   # fill color scheme
   output$plot1 = renderPlot({
     
     if (input$data == "Raster 1"){
-      r = raster("./data/r1.tif")
+      r_df = rasters[[1]]
     }
     if (input$data == "Raster 2"){
-      r = raster("./data/r2.tif")
+      r_df = rasters[[2]]
     }
     
-    # create df from raster for plotting
-    r_df = as.data.frame(r, xy=TRUE)
-    colnames(r_df) = c("x", "y", "z")
+    # # create df from raster for plotting
+    # r_df = as.data.frame(r, xy=TRUE)
+    # colnames(r_df) = c("x", "y", "z")
     
     # create plot
     ggplot(data=r_df, mapping=aes(x=x, y=y, fill=z))+
