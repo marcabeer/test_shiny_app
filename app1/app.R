@@ -20,14 +20,13 @@ library(ggplot2)
 #           width = 8)
 
 ui = fluidPage(
-  titlePanel("Raster explorer"),
-  sidebarPanel(h1("Select options"),
+  titlePanel(fluidRow(column(width=4, offset=4, "Data explorer"))),
+  sidebarPanel(h1("Options"),
                selectInput("data", "Select dataset", choices = c("Raster 1", "Raster 2")),
                selectInput("color", "Select color scheme", choices = c("viridis", "mako", "magma")),
                width = 4),
   
-  mainPanel(h1("Map"),
-            plotOutput(outputId = "plot1"),
+  mainPanel(plotOutput(outputId = "plot1"),
             width = 8),
   position = "left",
   fluid = TRUE
